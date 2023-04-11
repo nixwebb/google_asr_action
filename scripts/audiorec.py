@@ -5,7 +5,7 @@ import wave
 import time
 import os
 
-Threshold = 50
+Threshold = 125
 
 SHORT_NORMALIZE = (1.0/32768.0)
 chunk = 1024
@@ -84,8 +84,16 @@ class Recorder:
                 silent = False
                 self.record()
                 
+    # Speech threhold around 125 RMS
+    def testThresh(self):
+        print('Testing beginning')
+        while True:
+            input = self.stream.read(chunk)
+            rms_val = self.rms(input)
+            print("RMS:",rms_val)
 
 #a = Recorder()
+#a.testThresh()
 
 #if I want to have open mic us listen()
 #a.listen()
